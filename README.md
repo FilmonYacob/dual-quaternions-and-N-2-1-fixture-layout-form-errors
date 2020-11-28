@@ -1,5 +1,5 @@
 # Introduction
-This project helps make part quality prediction while considering N-2-1 fixture layout and part with form errors in multistage machining processes. To demonstrate the idea, a two stationed machining line with 12-2-1 locators is implemented. 
+This project is used for part quality prediction in multistage machining processes while considering N-2-1 fixture layout and parts with form errors. To demonstrate the idea, a two stationed machining line with a 12-2-1 locators is implemented. 
 
 # Additional Libraries
 The code is dependent on the libraries below.
