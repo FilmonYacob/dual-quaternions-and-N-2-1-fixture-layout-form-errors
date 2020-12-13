@@ -261,13 +261,26 @@ v8PerfectPlane = moveFeaturesBy(v8PerfectPlane, T);
 
 % Translate part by the same magnitude
 vFeatures = moveVerticesBy(vFeatures, R, err); % err-coordiantes differ
- 
+
 err = getProjectedTestPointsPlucker2(v8PerfectPlane, [0, 0, 0], v8PerfectPlane(2:4, 1)) - ...
     getProjectedTestPointsPlucker2(v8planeActual, [0, 0, 0], v8PerfectPlane(2:4, 1));
 assert(norm(err) < tol)
 
 % Info for secondary and teriary direction
 normalPrim = v8PerfectPlane(2:4);
+
+    function checkForInterference(vFeatures,nPrim,rayDir,iStableLocs)
+        % primary
+        tol = 2 * 10^-4;
+        vFeature = vFeatures{nPrim};
+        FF1 = FFs{nPrim};
+        for p = 1:3
+            [intersect, t, ~, ~, xcoor] = TriangleRayIntersection( ...
+                Ps(iStableLocs(p), :), rayDir, vFeature(FF1(:, 1), :), vFeature(FF1(:, 2), :), vFeature(FF1(:, 3), :), 'lineType', 'line');
+            interPnts = real(unique(round(xcoor(intersect, :), 6), 'rows'));
+            interFere(Ps(iStableLocs(p), :)-interPnts)
+        end
+    end
 end
 %%
 function [diffSurf, iFeatureCorrsPoint, interDists] = projPntsGetDiffSurf(vFeature, FFPrim, rayDir, vFixPrim, F, asseDir)
