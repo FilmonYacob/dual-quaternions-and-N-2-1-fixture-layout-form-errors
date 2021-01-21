@@ -1,3 +1,6 @@
+% Copyright(c) 2020, Filmon Yacob.
+% Distributed under the MIT License 
+
 % Predicts part quality given part with form error and N-2-1 layout
 clear; clc; close all;
 rng(2020) % for repeatability
